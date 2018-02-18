@@ -7,64 +7,7 @@ import { State, Store} from '@sambego/storybook-state';
 
 import Ztree from '../src/index';
 
-
-let d = [];
-for (let i = 0; i < 10; i++) {
-  d.push({
-    id: `country-${i}`,
-    name: `country-${i}`,
-    pId: null,
-    children: [],
-  });
-}
-d.forEach(t => {
-  for (let i = 0; i < 30; i++) {
-    t.children.push({
-      id: `${t.id}-region-${i}`,
-      name: `region-${i}`,
-      pId: t.id,
-      children: [],
-    })
-  }
-});
-d.forEach(t => {
-  t.children.forEach(k => {
-    for (let i = 0; i < 20; i++) {
-      k.children.push({
-        id: `${k.id}-city-${i}`,
-        name: `city-${i}`,
-        pId: k.id,
-        children: null,
-      })
-    }
-  })
-});
-
-
-const SelectedNodes = ({ nodes }) => {
-  return (
-    <div>
-      <ul>
-        {
-          nodes.map(t => {
-            return (
-              <li>
-                Node - 
-                id: {t.id} - 
-                name: {t.name} - 
-                halfCheck: {t.isHalfCheck ? 'ture' : 'false'} -
-                isParent: {t.isParent ? 'true' : 'false'} -
-                level: {t.level}
-              </li>
-            );
-          })
-        }
-      </ul>
-    </div>
-  );
-};
-
-
+const d = getMockRegionData();
 
 storiesOf('Ztree', module)
   .add('ztree default', () => {
@@ -123,7 +66,64 @@ storiesOf('Ztree', module)
         <Ztree nodes={dCopy} onCheckChange={handleCheckedChange} />
       </div>
     );
-  })
-  
-  ;
+  });
 
+
+function getMockRegionData() {
+  let d = [];
+  for (let i = 0; i < 10; i++) {
+    d.push({
+      id: `country-${i}`,
+      name: `country-${i}`,
+      pId: null,
+      children: [],
+    });
+  }
+  d.forEach(t => {
+    for (let i = 0; i < 30; i++) {
+      t.children.push({
+        id: `${t.id}-region-${i}`,
+        name: `region-${i}`,
+        pId: t.id,
+        children: [],
+      })
+    }
+  });
+  d.forEach(t => {
+    t.children.forEach(k => {
+      for (let i = 0; i < 20; i++) {
+        k.children.push({
+          id: `${k.id}-city-${i}`,
+          name: `city-${i}`,
+          pId: k.id,
+          children: null,
+        })
+      }
+    })
+  });
+
+  return d;
+}
+
+const SelectedNodes = ({ nodes }) => {
+  return (
+    <div>
+      <ul>
+        {
+          nodes.map(t => {
+            return (
+              <li>
+                Node - 
+                id: {t.id} - 
+                name: {t.name} - 
+                halfCheck: {t.isHalfCheck ? 'ture' : 'false'} -
+                isParent: {t.isParent ? 'true' : 'false'} -
+                level: {t.level}
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  );
+};
