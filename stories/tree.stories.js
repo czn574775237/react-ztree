@@ -16,7 +16,7 @@ storiesOf('Ztree', module)
     );
   })
 
-  .add('ztree selecte event', () => {
+  .add('ztree select event', () => {
     const handleCheckedChange = (selectedNodes) => {
       action('Check change')(selectedNodes);
       store.set({
