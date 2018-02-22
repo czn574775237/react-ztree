@@ -12,10 +12,10 @@ A react component wrapper of 'ztree' for large data tree component.
 | 组件 props  | 说明 |
 | ------------- | ------------- |
 | onCheckChange | Function |
-| nodes | model |
+| nodes | [{id, name, children}] |
 
 
-| nodes | 结构 - 数组类型 |
+| nodes | Array |
 | ---- | ---- |
 | id | node ID|
 | name | node name |
